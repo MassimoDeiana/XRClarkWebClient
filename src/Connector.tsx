@@ -9,6 +9,8 @@ const Connector = () => {
     const [selectedDevice, setSelectedDevice] = useState<Device>();
     const [scenes, setScenes] = useState<string[]>();
     const [selectedScene, setSelectedScene] = useState<string>();
+    // const [machines, setMachines] = useState<string[]>();
+    // const [selectedMachine, setSelectedMachine] = useState<string>();
 
     useEffect(() => {
         const newConnection = new HubConnectionBuilder()
@@ -112,6 +114,7 @@ const Connector = () => {
         console.log(JSON.parse(e.target.value).scenes);
         setSelectedDevice(JSON.parse(e.target.value));
         setScenes(JSON.parse(e.target.value).scenes);
+        // setMachines(JSON.parse(e.target.value).machines);
         // console.log(selectedDevice);
     };
 
@@ -123,6 +126,12 @@ const Connector = () => {
         console.log(selectedScene);
         // console.log("handle change");
     };
+
+    // const handleChangeMachine = (e:ChangeEvent<HTMLSelectElement>) => {
+    //     //console.log(JSON.parse(e.target.value));
+    //     // console.log("début handle");
+    //     setSelectedMachine(e.target.value);
+    // };
 
     useEffect(() => {
         axios.get("https://localhost:7050/api/Server").then((res) => setDevices(res.data))
@@ -164,6 +173,16 @@ const Connector = () => {
                     <option id="scene" value={scene} key={index}>{scene}</option>
                 ))}
             </select>
+
+            {/* <select  onChange={handleChangeMachine}>
+                <option>Aucune machine séléctionné</option>
+                {machines?.map((machine, index) => (
+                    <option id="machine" value={machine} key={index}>{machine}</option>
+                ))}
+
+            </select> */}
+
+
 
 
             <div>
