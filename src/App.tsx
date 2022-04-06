@@ -1,12 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Connector from './Connector';
+import React from "react";
+import "./App.css";
+import Connector from "./Connector";
+import Navbar from "./Navbar";
 
 function App() {
   return (
     <div className="App">
-      <Connector/>
+      <Navbar />
+      <Connector />
     </div>
   );
 }
