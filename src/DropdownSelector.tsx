@@ -4,7 +4,7 @@ const DropdownSelector = (props: any) => {
   const [selectedItem, setSelectedItem] = useState<string>("");
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    console.log(event);
+    // console.log(event);
     props.onChange(event.target.value);
   };
 

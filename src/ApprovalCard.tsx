@@ -6,7 +6,8 @@ import { FiSettings } from "react-icons/fi";
 
 const ApprovalCard = (props: any) => {
   const [selectedScene, setSelectedScene] = React.useState<string>("");
-  const [selectedMachine, setSelectedMachine] = React.useState<string>("");
+  const [selectedMachine, setSelectedMachine] =
+    React.useState<MachineryModel>();
   const [hiddenLog, setHiddenLog] = React.useState<boolean>(true);
   const [hiddenSettings, setHiddenSettings] = React.useState<boolean>(true);
   const [machinesName, setMachinesName] = React.useState<string[]>([]);
@@ -15,13 +16,15 @@ const ApprovalCard = (props: any) => {
     setSelectedScene(scene);
   };
 
-  const handleMachineChange = (machine: string) => {
-    setSelectedMachine(machine);
+  const handleMachineChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    // console.log(event.target.value);
+    setSelectedMachine(JSON.parse(event.target.value));
   };
 
   const onSubmitStart = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    props.onSubmit(props.device, selectedScene, selectedMachine);
+    console.log(selectedMachine!.name);
+    props.onSubmit(props.device, selectedScene, selectedMachine!.name);
   };
 
   const onSubmitStop = (event: React.FormEvent<HTMLFormElement>) => {
@@ -44,7 +47,7 @@ const ApprovalCard = (props: any) => {
   };
 
   const ButtonDisplay = () => {
-    console.log(props.device);
+    // console.log(props.device);
     var disable = false;
     if (selectedScene === props.device.activeScene.name) disable = true;
 
@@ -77,22 +80,12 @@ const ApprovalCard = (props: any) => {
     );
   };
 
-  // React.useEffect(() => {
-  //   console.log("ici");
-  //   setMachinesName(props.machines.map((machine: any) => machine.name));
-  // }, []);
-
-  // const getNamesOfMachines = () => {
-  //   console.log("ici");
-  //   console.log(machinesName);
-  // };
-
   const myComponent = {
     height: "220px",
     overflow: "auto",
   };
 
-  console.log(machinesName);
+  // console.log(props.device.machines);
   return (
     <div className="container">
       <div className="row">
@@ -106,11 +99,27 @@ const ApprovalCard = (props: any) => {
             placeholder="Choix de la scène"
             onChange={handleSceneChange}
           />
-          <DropdownSelector
-            items={props.device.machines}
-            placeholder="Choix de la machine"
-            onChange={handleMachineChange}
-          />
+
+          <div>
+            <select
+              className="ui search dropdown"
+              onChange={handleMachineChange}
+              defaultValue={"DEFAULT"}
+              // value={selectedItem}
+            >
+              <option value="DEFAULT" disabled hidden>
+                Choix de la machine
+              </option>
+              {props.device.machines.map(
+                (item: MachineryModel, index: number) => (
+                  <option id="item" value={JSON.stringify(item)} key={index}>
+                    {item.name}
+                  </option>
+                )
+              )}
+            </select>
+          </div>
+
           <button className="ui orange button" onClick={switchDisplaySettings}>
             <FiSettings />
           </button>
@@ -131,7 +140,7 @@ const ApprovalCard = (props: any) => {
             <LogError logs={props.device.activeScene.logs} />
           </div>
           <div hidden={hiddenSettings}>
-            <MachineSettings />
+            <MachineSettings machine={selectedMachine} />
           </div>
         </div>
       </div>
