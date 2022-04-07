@@ -11,6 +11,7 @@ const ApprovalCard = (props: any) => {
   const [hiddenLog, setHiddenLog] = React.useState<boolean>(true);
   const [hiddenSettings, setHiddenSettings] = React.useState<boolean>(true);
   const [machinesName, setMachinesName] = React.useState<string[]>([]);
+  const [mass, setMass] = React.useState<number>(0);
 
   const handleSceneChange = (scene: string) => {
     setSelectedScene(scene);
@@ -24,7 +25,7 @@ const ApprovalCard = (props: any) => {
   const onSubmitStart = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(selectedMachine!.name);
-    props.onSubmit(props.device, selectedScene, selectedMachine!.name);
+    props.onSubmit(props.device, selectedScene, selectedMachine!.name, mass);
   };
 
   const onSubmitStop = (event: React.FormEvent<HTMLFormElement>) => {
@@ -79,6 +80,11 @@ const ApprovalCard = (props: any) => {
       </button>
     );
   };
+
+  // const onInputChange = (mass: number) => {
+  //   console.log(mass);
+  //   // setMass(mass);
+  // };
 
   const myComponent = {
     height: "220px",
@@ -140,7 +146,10 @@ const ApprovalCard = (props: any) => {
             <LogError logs={props.device.activeScene.logs} />
           </div>
           <div hidden={hiddenSettings}>
-            <MachineSettings machine={selectedMachine} />
+            <MachineSettings
+              machine={selectedMachine}
+              // onInputChange={onInputChange}
+            />
           </div>
         </div>
       </div>

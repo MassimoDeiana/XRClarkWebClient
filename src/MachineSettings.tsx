@@ -1,10 +1,15 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { GiForklift } from "react-icons/gi";
 import { FaWeightHanging } from "react-icons/fa";
 import { MdHeight } from "react-icons/md";
 
 const MachineSettings = (props: any) => {
   // console.log(props.machine);
+
+  // const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   event.preventDefault();
+  //   props.onInputChange(event.target.value);
+  // };
 
   const DisplayMachine = (machine: any) => {
     if (props.machine === undefined)
@@ -34,6 +39,13 @@ const MachineSettings = (props: any) => {
             </div>
             {props.machine.maxHeight} M
           </div>
+          {/* <form>
+            <input
+              type="number"
+              placeholder="Masse du clark (kg)"
+              onChange={onInputChange}
+            />
+          </form> */}
         </div>
       );
   };

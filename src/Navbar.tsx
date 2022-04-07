@@ -13,7 +13,7 @@ const Navbar = () => {
             className="d-inline-block align-top mr-4"
             alt=""
           />
-          Bootstrap
+          Trainning Solutions : Formation de cariste
         </a>
       </nav>
     </div>

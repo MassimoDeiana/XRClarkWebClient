@@ -40,7 +40,8 @@ const Connector = () => {
   const startSimulation = async (
     selectedDevice: Device,
     selectedScene: string,
-    selectedMachine: string
+    selectedMachine: string,
+    mass: number
   ) => {
     const user = {
       id: selectedDevice.id,
@@ -51,7 +52,8 @@ const Connector = () => {
         "StartSimulation",
         user,
         selectedScene,
-        selectedMachine
+        selectedMachine,
+        mass
       );
     } catch (e) {
       console.log(e);
@@ -81,20 +83,23 @@ const Connector = () => {
     width: "80%",
   };
 
-  // const onStop = (device: Device) => {
-  //   console.log("stop");
-  //   console.log(device);
-  //   stopSimulation(device);
-  // };
+  const IsDevicesConnected = () => {
+    console.log(devices);
+    if (!devices) {
+      return <div>Aucun appareil connecté</div>;
+    } else {
+      if (devices.length === 0) {
+        return <div>Aucun appareil connecté</div>;
+      }
+    }
 
-  // const onStart = (device: Device, scene: string, machine: string) => {
-  //   console.log("start");
-  //   console.log(device);
-  //   startSimulation(device, scene, machine);
-  // };
+    return <div>Appareils connectés</div>;
+  };
 
   return (
     <div>
+      <IsDevicesConnected />
+
       {devices?.map((device, index) => (
         <div key={index}>
           <ApprovalCard
