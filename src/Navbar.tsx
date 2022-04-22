@@ -1,11 +1,12 @@
 import React from "react";
 import Logo from "./logo.svg";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <div>
       <nav className="navbar navbar-light bg-light">
-        <a className="navbar-brand" href="#">
+        <Link to="/Home" className="navbar-brand">
           <img
             src={Logo}
             width="30"
@@ -14,7 +15,11 @@ const Navbar = () => {
             alt=""
           />
           Trainning Solutions : Formation de cariste
-        </a>
+        </Link>
+
+        <Link to="/Connector"> Appareils connectés </Link>
+        <Link to="/MachineManagement"> Ajouter machine </Link>
+        <Link to="/MachineList"> Gérer machines </Link>
       </nav>
     </div>
   );

@@ -74,7 +74,7 @@ const Connector = () => {
 
   useEffect(() => {
     axios
-      .get("https://localhost:7050/api/Server")
+      .get("https://localhost:7050/api/Server/users")
       .then((res) => setDevices(res.data));
   }, []);
 
