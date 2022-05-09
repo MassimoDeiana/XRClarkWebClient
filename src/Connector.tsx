@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { HubConnectionBuilder, HubConnection } from "@microsoft/signalr";
 import axios from "axios";
-import ApprovalCard from "./ApprovalCard";
+import DeviceManager from "./DeviceManager";
 
 const Connector = () => {
   const [connection, setConnection] = useState<HubConnection>();
@@ -102,7 +102,7 @@ const Connector = () => {
 
       {devices?.map((device, index) => (
         <div key={index}>
-          <ApprovalCard
+          <DeviceManager
             device={device}
             onSubmit={startSimulation}
             onStop={stopSimulation}
